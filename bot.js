@@ -37,8 +37,7 @@ var rata = (idTelegram) => {
 			method: "POST",
 			headers: {
 				"Content-Type":  "application/json",
-				"Authorization": config.googleApiKey,
-				"Cache-Control": "no-cache"
+				"Authorization": config.googleApiKey
 			},
 			body: {
 				"to": config.tokenFront,
