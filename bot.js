@@ -20,10 +20,14 @@ bot.command("start", (msg) => {
 })
 
 bot.command("send", (msg) => {
+	console.log("Getting send callback")
+	
 	rata(msg.chat.id).then((data) => {
 		var answer = new Message()
 			.text(data)
 			.to(msg.chat.id)
+
+		bot.send(answer)
 	})
 })
 
