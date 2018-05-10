@@ -41,12 +41,15 @@ var rata = (idTelegram) => {
 				"Cache-Control": "no-cache"
 			},
 			body: {
-				"tipoNotificacion": "bot telegram",
-				"pa_FchInicio":     "9-5-2018",
-				"pa_FchFin":        "10-5-2018",
-				"destinatario":     "5212461157552",
-				"idTelegram":       idTelegram
+				"to": config.tokenFront,
+				"data": {
+					"tipoNotificacion": "bot telegram",
+					"pa_FchInicio":     "9-5-2018",
+					"pa_FchFin":        "10-5-2018",
+					"destinatario":     "5212461157552",
+					"idTelegram":       idTelegram
+				}
 			}
-		}).then(r => r.text()).then(data => resolve(data))
+		}).then(r => r.text()).then(data => resolve(data)).catch(err => reject(err))
 	})
 }

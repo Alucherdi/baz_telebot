@@ -1,6 +1,7 @@
 var config = {
 	telegramApiKey: "577001210:AAF1q8ZxC9kpSyFbbF7fKgfThJwAxkEi41Y",
-	googleApiKey:   "key=AAAAsISpCi0:APA91bG6Orm8wZmCDCgRMKLlkZSQgF5RjVJc0gLx6wDXCekzuXgM1QXurRinNIn0sotQhxMkpJByX5A5E201d87fYpr91vAh5qY8p_nWf9kCeh583JJPBxiGtjUDWcxOtjtCyW6_gmRu"
+	googleApiKey:   "key=AAAAsISpCi0:APA91bG6Orm8wZmCDCgRMKLlkZSQgF5RjVJc0gLx6wDXCekzuXgM1QXurRinNIn0sotQhxMkpJByX5A5E201d87fYpr91vAh5qY8p_nWf9kCeh583JJPBxiGtjUDWcxOtjtCyW6_gmRu",
+	tokenFront:     "dT8LivcJYIA:APA91bFFgHZGDhwQuId1Du_JiqAq0sXR0w273siPdrsKktn9q7uZTwj6JVWDKpAYvrZl8Ayr8bT0Uf87wK77HtBLZapntz9UqtmbqqFGrNF0IS-MPxjN6xw_JwOQSPyrvsZwQlQgM8GJ"
 }
 
 module.exports = config
