@@ -32,6 +32,20 @@ bot.command("send", (msg) => {
 })
 
 var rata = (idTelegram) => {
+
+	var body = {
+		"to": config.tokenFront,
+		"data": {
+			"tipoNotificacion": "bot telegram",
+			"pa_FchInicio":     "9-5-2018",
+			"pa_FchFin":        "10-5-2018",
+			"destinatario":     "5212461157552",
+			"idTelegram":       idTelegram
+		}
+	}
+
+	console.log(body)
+	
 	return new Promise((resolve, reject) => {
 		fetch("https://fcm.googleapis.com/fcm/send", {
 			method: "POST",
@@ -39,16 +53,7 @@ var rata = (idTelegram) => {
 				"Content-Type":  "application/json",
 				"Authorization": config.googleApiKey
 			},
-			body: {
-				"to": config.tokenFront,
-				"data": {
-					"tipoNotificacion": "bot telegram",
-					"pa_FchInicio":     "9-5-2018",
-					"pa_FchFin":        "10-5-2018",
-					"destinatario":     "5212461157552",
-					"idTelegram":       idTelegram
-				}
-			}
+			body: body
 		}).then(r => r.text()).then(data => resolve(data)).catch(err => reject(err))
 	})
 }
