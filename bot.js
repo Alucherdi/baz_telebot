@@ -33,7 +33,7 @@ bot.command("send", (msg) => {
 
 var rata = (idTelegram) => {
 
-	var body = {
+	var body = JSON.stringify({
 		"to": config.tokenFront,
 		"data": {
 			"tipoNotificacion": "bot telegram",
@@ -42,7 +42,7 @@ var rata = (idTelegram) => {
 			"destinatario":     "5212461157552",
 			"idTelegram":       idTelegram
 		}
-	}
+	})
 
 	console.log(body)
 	
