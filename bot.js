@@ -1,6 +1,8 @@
 var Bot     = require("telegram-api").default
 var Message = require('telegram-api/types/Message')
 
+var fetch   = require("node-fetch")
+
 var config = require("./config")
 
 var bot = new Bot({
@@ -16,3 +18,31 @@ bot.command("start", (msg) => {
 
 	bot.send(answer)
 })
+
+bot.command("send", (msg) => {
+	rata(msg.chat.id).then((data) => {
+		var answer = new Message()
+			.text(data)
+			.to(msg.chat.id)
+	})
+})
+
+var rata = (idTelegram) => {
+	return new Promise((resolve, reject) => {
+		fetch("https://fcm.googleapis.com/fcm/send", {
+			method: "POST",
+			headers: {
+				"Content-Type":  "application/json",
+				"Authorization": config.googleApiKey,
+				"Cache-Control": "no-cache"
+			},
+			body: {
+				"tipoNotificacion": "bot telegram",
+				"pa_FchInicio":     "9-5-2018",
+				"pa_FchFin":        "10-5-2018",
+				"destinatario":     "5212461157552",
+				"idTelegram":       idTelegram
+			}
+		}).then(r => r.text()).then(data => resolve(data))
+	})
+}
