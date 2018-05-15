@@ -23,7 +23,7 @@ bot.command("start", (msg) => {
 })
 
 bot.get(/\w/, (msg) => {
-	console.log(msg)
+	console.log(`Text from user: ${msg.text}`)
 })
 
 bot.command("send", (msg) => {
