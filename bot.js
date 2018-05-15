@@ -68,7 +68,7 @@ app.post("/reset", (req, res) => {
 app.listen(process.env.PORT, console.log("hi"))
 
 setInterval(() => {
-	fetch("/reset", {
+	fetch(`${process.env.IP}:${process.env.PORT}/reset`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"
