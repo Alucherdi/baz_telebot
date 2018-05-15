@@ -61,4 +61,17 @@ var rata = (idTelegram) => {
 	})
 }
 
+app.post("/reset", (req, res) => {
+	res.send("Tick")
+})
+
 app.listen(process.env.PORT, console.log("hi"))
+
+setInterval(() => {
+	fetch("/reset", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		}
+	}).then(r => r.text()).then(data => console.log(data))
+}, 5000)
