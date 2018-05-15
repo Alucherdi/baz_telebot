@@ -22,6 +22,10 @@ bot.command("start", (msg) => {
 	bot.send(answer)
 })
 
+bot.get(/\w/, (msg) => {
+	console.log(msg)
+})
+
 bot.command("send", (msg) => {
 	console.log("Getting send callback")
 	
