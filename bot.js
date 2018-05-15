@@ -1,10 +1,10 @@
 var express = require("express")
-var app     = express()
+var app = express()
 
-var Bot     = require("telegram-api").default
+var Bot = require("telegram-api").default
 var Message = require('telegram-api/types/Message')
 
-var fetch   = require("node-fetch")
+var fetch = require("node-fetch")
 
 var config = require("./config")
 
@@ -23,12 +23,30 @@ bot.command("start", (msg) => {
 })
 
 bot.get(/\w/, (msg) => {
-	console.log(`Text from user: ${msg.text}`)
+	var number = msg.text.replace(
+		/(-|\/|\s)/g, ""
+	).match(
+		/\d{10}/
+	)
+
+	if (number) {
+		var answer = new Message()
+			.text(`Se ha detectado el número telefónico en tu mensaje ${number[0]}`)
+			.to(msg.chat.id)
+
+		bot.send(answer)
+	} else {
+		var answer = new Message()
+			.text(`No se ha detectado ningún número telefónico en tu mensaje`)
+			.to(msg.chat.id)
+
+		bot.send(answer)
+	}
 })
 
 bot.command("send", (msg) => {
 	console.log("Getting send callback")
-	
+
 	rata(msg.chat.id).then((data) => {
 		var answer = new Message()
 			.text(data)
@@ -44,20 +62,20 @@ var rata = (idTelegram) => {
 		"to": config.topic,
 		"data": {
 			"tipoNotificacion": "bot telegram",
-			"pa_FchInicio":     "9-5-2018",
-			"pa_FchFin":        "10-5-2018",
-			"destinatario":     "5212461157552",
-			"idTelegram":       idTelegram
+			"pa_FchInicio": "9-5-2018",
+			"pa_FchFin": "10-5-2018",
+			"destinatario": "5212461157552",
+			"idTelegram": idTelegram
 		}
 	})
 
 	console.log(body)
-	
+
 	return new Promise((resolve, reject) => {
 		fetch("https://fcm.googleapis.com/fcm/send", {
 			method: "POST",
 			headers: {
-				"Content-Type":  "application/json",
+				"Content-Type": "application/json",
 				"Authorization": config.googleApiKey
 			},
 			body: body
