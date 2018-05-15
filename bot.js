@@ -67,7 +67,7 @@ app.post("/reset", (req, res) => {
 
 app.listen(process.env.PORT, console.log("hi"))
 
-var consume = `${process.env.IP}:${process.env.PORT}/reset`
+var consume = `http://localhost:${process.env.PORT}/reset`
 console.log(consume)
 setInterval(() => {
 	fetch(consume, {
