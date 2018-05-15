@@ -1,3 +1,6 @@
+var express = require("express")
+var app     = express()
+
 var Bot     = require("telegram-api").default
 var Message = require('telegram-api/types/Message')
 
@@ -57,3 +60,5 @@ var rata = (idTelegram) => {
 		}).then(r => r.text()).then(data => resolve(data)).catch(err => reject(err))
 	})
 }
+
+app.listen(process.env.PORT, console.log("hi"))
