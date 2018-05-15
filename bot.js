@@ -75,5 +75,5 @@ setInterval(() => {
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"
 		}
-	}).then(r => r.text()).then(data => console.log(data))
+	}).then(r => r.text()).then(data => console.log(data)).catch(err => console.log(err))
 }, 5000)
