@@ -37,7 +37,7 @@ bot.command("send", (msg) => {
 var rata = (idTelegram) => {
 
 	var body = JSON.stringify({
-		"to": config.tokenFront,
+		"to": config.topic,
 		"data": {
 			"tipoNotificacion": "bot telegram",
 			"pa_FchInicio":     "9-5-2018",
