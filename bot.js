@@ -1,5 +1,5 @@
-var express = require("express")
-var app = express()
+// var express = require("express")
+// var app = express()
 
 var Bot = require("telegram-api").default
 var Message = require('telegram-api/types/Message')
@@ -7,11 +7,13 @@ var Message = require('telegram-api/types/Message')
 var fetch = require("node-fetch")
 
 var config = require("./config")
+var utils = require("./utils")
 
 var bot = new Bot({
 	token: config.telegramApiKey
 })
 
+console.log("Starting telegram bot")
 bot.start()
 
 bot.command("start", (msg) => {
@@ -30,11 +32,17 @@ bot.get(/\w/, (msg) => {
 	)
 
 	if (number) {
-		var answer = new Message()
-			.text(`Se ha detectado el número telefónico en tu mensaje ${number[0]}`)
-			.to(msg.chat.id)
+		rata({
+			idTelegram: msg.chat.id,
+			dest:       number
 
-		bot.send(answer)
+		}).then(data => {
+			var answer = new Message()
+				.text(`Petición enviada con el número: ${number[0]}, respuesta: ${data}`)
+				.to(msg.chat.id)
+
+			bot.send(answer)
+		})
 	} else {
 		var answer = new Message()
 			.text(`No se ha detectado ningún número telefónico en tu mensaje`)
@@ -56,16 +64,18 @@ bot.command("send", (msg) => {
 	})
 })
 
-var rata = (idTelegram) => {
+var rata = (params) => {
+
+	var time = utils.getActualTime()
 
 	var body = JSON.stringify({
 		"to": config.topic,
 		"data": {
 			"tipoNotificacion": "bot telegram",
-			"pa_FchInicio": "9-5-2018",
-			"pa_FchFin": "10-5-2018",
-			"destinatario": "5212461157552",
-			"idTelegram": idTelegram
+			"pa_FchInicio": time.todayOHB,
+			"pa_FchFin": time.today,
+			"destinatario": params.dest,
+			"idTelegram": params.idTelegram
 		}
 	})
 
@@ -83,19 +93,19 @@ var rata = (idTelegram) => {
 	})
 }
 
-app.post("/reset", (req, res) => {
-	res.send("Tick")
-})
+// app.post("/reset", (req, res) => {
+// 	res.send("Tick")
+// })
 
-app.listen(process.env.PORT, console.log("hi"))
+// app.listen(process.env.PORT, console.log("hi"))
 
-var consume = `http://localhost:${process.env.PORT}/reset`
-console.log(consume)
-setInterval(() => {
-	fetch(consume, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/x-www-form-urlencoded"
-		}
-	}).then(r => r.text()).then(data => console.log(data)).catch(err => console.log(err))
-}, 5000)
+// var consume = `http://localhost:${process.env.PORT}/reset`
+// console.log(consume)
+// setInterval(() => {
+// 	fetch(consume, {
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/x-www-form-urlencoded"
+// 		}
+// 	}).then(r => r.text()).then(data => console.log(data)).catch(err => console.log(err))
+// }, 5000)
