@@ -1,5 +1,6 @@
 const TeleBot = require("telebot")
 const config  = require("./config")
+const utils   = require("./utils")
 
 const bot = new TeleBot(config.telegramApiKey)
 
@@ -14,7 +15,14 @@ bot.on(/\w/, (msg) => {
 		/\d{10}/
 	)
 
-	msg.reply.text(`Número detectado: ${number}`)
+	if (number) {
+		utils.rata({
+			dest: number,
+			idTelegram: msg.message_id
+		}).then(data => {
+			msg.reply.text(`Respuesta: ${data}`)
+		})
+	}
 })
 
 console.log("Starting bot")
