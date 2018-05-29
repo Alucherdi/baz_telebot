@@ -2,26 +2,11 @@ const config = require("./config")
 const fetch  = require("node-fetch")
 
 var utils = {
-	getActualTime: () => {
-		var now = new Date()
-		var today = `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
-		var todayOneHourBefore = `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()} ${now.getHours() - 1}:${now.getMinutes()}:${now.getSeconds()}`
-
-
-		return {
-			today: today,
-			todayOHB: todayOneHourBefore
-		}
-	},
 	rata: (params) => {
-		var time = utils.getActualTime()
-	
 		var body = JSON.stringify({
 			"to": config.topic,
 			"data": {
 				"tipoNotificacion": "bot telegram",
-				"fchInicio": time.todayOHB,
-				"fchFin": time.today,
 				"destinatario": params.dest,
 				"idTelegram": params.idTelegram
 			}
