@@ -20,8 +20,8 @@ var utils = {
 			"to": config.topic,
 			"data": {
 				"tipoNotificacion": "bot telegram",
-				"pa_FchInicio": time.todayOHB,
-				"pa_FchFin": time.today,
+				"fchInicio": time.todayOHB,
+				"fchFin": time.today,
 				"destinatario": params.dest,
 				"idTelegram": params.idTelegram
 			}
