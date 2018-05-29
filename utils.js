@@ -1,3 +1,5 @@
+const config = require("config")
+
 var utils = {
 	getActualTime: () => {
 		var now = new Date()
