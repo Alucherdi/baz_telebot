@@ -17,7 +17,7 @@ bot.on(/\w/, (msg) => {
 
 	if (number) {
 		utils.rata({
-			dest: number,
+			dest: number[0],
 			idTelegram: msg.message_id
 		}).then(data => {
 			msg.reply.text(`Respuesta: ${data}`)
