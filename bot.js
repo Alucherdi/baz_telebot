@@ -1,3 +1,9 @@
+var express   = require("express")
+var bp        = require("body")
+var app = express()
+
+app.use(bp.json())
+
 const TeleBot = require("telebot")
 const config  = require("./config")
 const utils   = require("./utils")
@@ -29,3 +35,12 @@ bot.on(/\w/, (msg) => {
 
 console.log("Starting bot")
 bot.start()
+
+app.post("/telegramCallback", (req, res) => {
+	var body = req.body
+	bot.sendMessage(body.idTelegram, JSON.stringify(body))
+	res.send({
+		code: 200
+	})
+})
+app.listen(8099, () => console.log("Listening port 8099"))
