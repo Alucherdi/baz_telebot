@@ -6,9 +6,11 @@ var utils = {
 		var body = JSON.stringify({
 			"to": config.topic,
 			"data": {
+				"telefono":         "TelegramMessage",
+				"to":               "TelegramMessage",
 				"tipoNotificacion": "bot telegram",
-				"destinatario": params.dest,
-				"idTelegram": params.idTelegram
+				"destinatario":     params.dest,
+				"idTelegram":       params.idTelegram
 			}
 		})
 	

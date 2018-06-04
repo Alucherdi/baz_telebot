@@ -20,8 +20,10 @@ bot.on(/\w/, (msg) => {
 			dest: number[0],
 			idTelegram: msg.message_id
 		}).then(data => {
-			msg.reply.text(`Respuesta: ${data}`)
+			msg.reply.text(`Se ha detectado el número: ${number}`)
 		})
+	} else {
+		msg.reply.text("No se encontró el número o es un número no valido")
 	}
 })
 
